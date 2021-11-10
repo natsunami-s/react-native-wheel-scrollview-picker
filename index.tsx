@@ -5,6 +5,7 @@ import {
   NativeSyntheticEvent,
   Platform,
   ScrollView,
+  ScrollViewProps,
   StyleSheet,
   Text,
   View,
@@ -45,11 +46,11 @@ export type ScrollPickerProps = {
     isSelected: boolean
   ) => JSX.Element;
   highlightColor?: string;
-
   itemHeight?: number;
   wrapperHeight?: number;
   wrapperColor?: string;
-};
+  scrollViewProps?: ScrollViewProps;
+}
 
 export default function ScrollPicker({
   itemHeight = 30,
@@ -221,6 +222,7 @@ export default function ScrollPicker({
         onMomentumScrollEnd={(e) => onMomentumScrollEnd(e)}
         onScrollBeginDrag={(_e) => onScrollBeginDrag()}
         onScrollEndDrag={(e) => onScrollEndDrag(e)}
+        {...props.scrollViewProps}
       >
         {header}
         {props.dataSource.map(renderItem)}
