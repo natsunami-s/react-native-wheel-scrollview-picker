@@ -91,6 +91,13 @@ export default function ScrollPicker({
     [initialized, itemHeight, selectedIndex, sView, timer]
   );
 
+  useEffect(() => {
+    if(props.selectedIndex !== undefined) {
+      setSelectedIndex(props.selectedIndex);
+    }
+
+  }, [props.selectedIndex])
+
   const renderPlaceHolder = () => {
     const h = (wrapperHeight - itemHeight) / 2;
     const header = <View style={{ height: h, flex: 1 }} />;
