@@ -176,7 +176,9 @@ export default function ScrollPicker({
     // if not used, event will be garbaged
     const _e: NativeSyntheticEvent<NativeScrollEvent> = { ...e };
     timer && clearTimeout(timer);
+    // @ts-ignore
     setTimer(
+      // @ts-ignore
       setTimeout(() => {
         if (!momentumStarted) {
           scrollFix(_e);
