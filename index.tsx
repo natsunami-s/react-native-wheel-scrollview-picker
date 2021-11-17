@@ -35,7 +35,7 @@ const isViewStyle = (style: ViewProps["style"]): style is ViewStyle => {
 export type ScrollPickerProps = {
   style?: ViewProps["style"];
   dataSource: Array<string | number>;
-  selectedIndex?: number;
+  selectedIndexProp?: number;
   onValueChange?: (
     value: ScrollPickerProps["dataSource"][0],
     index: number
@@ -55,11 +55,12 @@ export type ScrollPickerProps = {
 export default function ScrollPicker({
   itemHeight = 30,
   style,
+  selectedIndexProp = 0,
   ...props
 }: ScrollPickerProps): JSX.Element {
   const [initialized, setInitialized] = useState(false);
-  const [selectedIndex, setSelectedIndex] = useState(
-    props.selectedIndex && props.selectedIndex >= 0 ? props.selectedIndex : 0
+  const [selectedIndex, setSelectedIndex] = useState<number>(
+    selectedIndexProp && selectedIndexProp >= 0 ? selectedIndexProp : 0
   );
   const sView = useRef<ScrollView>(null);
   const [isScrollTo, setIsScrollTo] = useState(false);
@@ -92,11 +93,11 @@ export default function ScrollPicker({
   );
 
   useEffect(() => {
-    if(props.selectedIndex !== undefined) {
-      setSelectedIndex(props.selectedIndex);
+    if(selectedIndexProp !== undefined) {
+      setSelectedIndex(selectedIndexProp);
     }
 
-  }, [props.selectedIndex])
+  }, [selectedIndexProp])
 
   const renderPlaceHolder = () => {
     const h = (wrapperHeight - itemHeight) / 2;
